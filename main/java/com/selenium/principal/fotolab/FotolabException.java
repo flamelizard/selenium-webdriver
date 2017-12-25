@@ -1,4 +1,4 @@
-package principal.rfi.fotolab;
+package com.selenium.principal.fotolab;
 
 
 public class FotolabException extends Exception {

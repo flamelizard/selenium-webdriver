@@ -1,27 +1,26 @@
-package principal.rfi.fotolab;
+package com.selenium.principal.fotolab;
 
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static principal.rfi.fotolab.Utils.isFile;
+/*
+Recommended practice to have class for driver lifecycle
+No need to close driver explicitly
 
+Just extend the class to init and acquire driver
+But how to inject driver path to set webdriver System property?
+ */
+public class FunctionalTest {
+    protected static WebDriver driver;
+    private static String driverPath =
+            "D:\\projects\\fotolab\\src\\resources\\driver\\IEDriverServer.exe";
 
-public class Browser {
-    private WebDriver driver;
-    private String driverPath;
-
-    public Browser(String driverPath) throws FotolabException {
-        this.driverPath = driverPath;
-        initIEDriver();
-    }
-
-    private void initIEDriver() throws FotolabException {
-        if (!isFile(driverPath))
-            throw new FotolabException(
-                    "Webdriver exe file not found <" + driverPath + ">");
-        System.setProperty("webdriver.ie.driver", driverPath);
-
+    @BeforeClass
+    public static void setUp() {
         DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
         ieCapabilities.setCapability("nativeEvents", false);
         ieCapabilities.setCapability("unexpectedAlertBehaviour", "accept");
@@ -32,15 +31,14 @@ public class Browser {
         ieCapabilities.setCapability(
                 InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, false);
 
+        System.setProperty("webdriver.ie.driver", driverPath);
         driver = new InternetExplorerDriver(ieCapabilities);
         driver.manage().window().maximize();
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
-
-    public void close() {
-        driver.close();
+    @AfterClass
+    public static void tearDown() {
+        if (driver != null)
+            driver.close();
     }
 }

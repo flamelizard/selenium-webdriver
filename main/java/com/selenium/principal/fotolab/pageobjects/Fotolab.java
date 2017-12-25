@@ -1,12 +1,12 @@
-package principal.rfi.fotolab.pageobjects;
+package com.selenium.principal.fotolab.pageobjects;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static com.selenium.principal.fotolab.Utils.jsClick;
+import static com.selenium.principal.fotolab.Utils.scrollInto;
 import static junit.framework.Assert.assertEquals;
-import static principal.rfi.fotolab.Utils.jsClick;
-import static principal.rfi.fotolab.Utils.scrollInto;
 
 
 public class Fotolab extends PageObject<Fotolab> {

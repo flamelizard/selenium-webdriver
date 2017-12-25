@@ -1,4 +1,4 @@
-package principal.rfi.fotolab;
+package com.selenium.principal.fotolab;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

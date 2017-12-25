@@ -1,5 +1,6 @@
-package principal.rfi.fotolab.pageobjects;
+package com.selenium.principal.fotolab.pageobjects;
 
+import com.selenium.principal.fotolab.FotolabException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -8,13 +9,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import principal.rfi.fotolab.FotolabException;
 
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
-import static principal.rfi.fotolab.Utils.isFile;
-import static principal.rfi.fotolab.Utils.jsClick;
+import static com.selenium.principal.fotolab.Utils.isFile;
+import static com.selenium.principal.fotolab.Utils.jsClick;
 
 
 public class ProductEditor extends PageObject<ProductEditor> {

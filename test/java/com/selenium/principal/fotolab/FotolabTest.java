@@ -1,11 +1,11 @@
-package principal.rfi.fotolab;
+package com.selenium.principal.fotolab;
 
+import com.selenium.principal.fotolab.pageobjects.*;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import principal.rfi.fotolab.pageobjects.*;
 
 import java.io.IOException;
 import java.util.Arrays;
