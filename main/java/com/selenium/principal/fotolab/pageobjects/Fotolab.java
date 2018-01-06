@@ -12,7 +12,7 @@ import static junit.framework.Assert.assertEquals;
 public class Fotolab extends PageObject<Fotolab> {
     private String title = "CEWE fotoslužby a fotoaparáty | FOTOLAB.cz";
 
-    @FindBy(css = "div.cw_grid_2:nth-of-type(2) div ul li a[title='Fotoobrazy']")
+    @FindBy(css = ".cw_footer_fastnav ul li a[title='Fotoobrazy']")
     private WebElement fotoobrazy;
 
     public Fotolab(WebDriver driver) {

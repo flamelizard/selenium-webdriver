@@ -17,6 +17,7 @@ public class FotoNaPlatno extends PageObject<FotoNaPlatno> {
 
     public FotoNaPlatno(WebDriver driver) {
         super(driver);
+        get();
     }
 
     @Override

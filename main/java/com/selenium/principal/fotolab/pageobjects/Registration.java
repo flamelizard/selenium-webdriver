@@ -9,11 +9,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Registration extends PageObject<Registration> {
     public Registration(WebDriver driver) {
         super(driver);
+        get();
     }
 
     @Override
     protected void isLoaded() throws Error {
         new WebDriverWait(driver, 5).until(ExpectedConditions.
-                presenceOfElementLocated(By.linkText("Přihlášení")));
+                presenceOfElementLocated(By.linkText("Registrace")));
     }
 }

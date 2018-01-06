@@ -1,6 +1,6 @@
 package com.selenium.principal.fotolab;
 
-import com.selenium.principal.fotolab.pageobjects.*;
+import com.selenium.principal.fotolab.pageobjects.Fotolab;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -39,13 +39,13 @@ public class FotolabTest {
         List<String> expected = Arrays.asList(
                 config.getProperty("fotoobrazy.expectedTypes").split(","));
 
-        Fotolab fotolab = new Fotolab(browser.getDriver()).get();
-        Fotoobrazy fotoobrazy = fotolab.selectFotoobrazy().get();
-        fotoobrazy.checkAvailableTypes(expected);
-        FotoNaPlatno fotoNaPlatno = fotoobrazy.selectFotoNaPlatno().get();
-        ProductEditor editor = fotoNaPlatno.makeOrder().get();
-        editor.uploadPhotoBackground(config.getProperty("user.photo.path"));
-        ShoppingCart cart = editor.addOrderToCart().get();
-        Registration registration = cart.proceedToRegistration();
+        new Fotolab(browser.getDriver())
+                .selectFotoobrazy()
+                .checkAvailableTypes(expected)
+                .selectFotoNaPlatno()
+                .makeOrder()
+                .uploadPhotoBackground(config.getProperty("user.photo.path"))
+                .addOrderToCart()
+                .proceedToRegistration();
     }
 }

@@ -18,7 +18,7 @@ import static com.selenium.principal.fotolab.Utils.jsClick;
 public class Fotoobrazy extends PageObject<Fotoobrazy> {
     private String title = "Fotoobrazy";
 
-    @FindBy(id = "cw_subnav")
+    @FindBy(id = "cw_leftnav")
     private WebElement navigationPane;
 
     @FindBy(css = "#pip_ips_target > span")
@@ -29,6 +29,7 @@ public class Fotoobrazy extends PageObject<Fotoobrazy> {
 
     public Fotoobrazy(WebDriver driver) {
         super(driver);
+        get();
     }
 
     @Override
@@ -42,7 +43,7 @@ public class Fotoobrazy extends PageObject<Fotoobrazy> {
                 .cssSelector("a[href*='fotoobrazy']"));
     }
 
-    public void checkAvailableTypes(List<String> expectedTypes)
+    public Fotoobrazy checkAvailableTypes(List<String> expectedTypes)
             throws FotolabException {
         List<String> allTypesFound = getFotoobrazyLinks().stream()
                 .map(elem -> elem.getAttribute("title").toLowerCase())
@@ -56,6 +57,7 @@ public class Fotoobrazy extends PageObject<Fotoobrazy> {
         if (notFound.size() > 0)
             throw new FotolabException(
                     "Missing fotobrazy types: " + notFound);
+        return this;
     }
 
     public FotoNaPlatno selectFotoNaPlatno() {

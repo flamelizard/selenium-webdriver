@@ -20,6 +20,7 @@ public class ShoppingCart extends PageObject<ShoppingCart> {
 
     public ShoppingCart(WebDriver driver) {
         super(driver);
+        get();
     }
 
     @Override

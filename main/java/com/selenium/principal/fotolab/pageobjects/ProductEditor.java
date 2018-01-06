@@ -47,6 +47,7 @@ public class ProductEditor extends PageObject<ProductEditor> {
 
     public ProductEditor(WebDriver driver) {
         super(driver);
+        get();
     }
 
     @Override
@@ -55,7 +56,7 @@ public class ProductEditor extends PageObject<ProductEditor> {
                 .until(ExpectedConditions.visibilityOf(imageIcon));
     }
 
-    public void uploadPhotoBackground(String photo) throws FotolabException {
+    public ProductEditor uploadPhotoBackground(String photo) throws FotolabException {
         if (!isFile(photo))
             throw new FotolabException("Photo file not found <" + photo + ">");
 
@@ -79,6 +80,7 @@ public class ProductEditor extends PageObject<ProductEditor> {
         jsClick(btnLoadPhoto, driver);
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.invisibilityOf(loadingIcon));
+        return this;
     }
 
     public ShoppingCart addOrderToCart() {
