@@ -1,6 +1,7 @@
 package com.selenium.principal.fotolab.pageobjects;
 
 import com.selenium.principal.fotolab.FotolabException;
+import com.selenium.principal.fotolab.pageobjects.templates.PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -56,7 +57,7 @@ public class ProductEditor extends PageObject<ProductEditor> {
                 .until(ExpectedConditions.visibilityOf(imageIcon));
     }
 
-    public ProductEditor uploadPhotoBackground(String photo) throws FotolabException {
+    public ProductEditor uploadBackgroundPhoto(String photo) throws FotolabException {
         if (!isFile(photo))
             throw new FotolabException("Photo file not found <" + photo + ">");
 
@@ -78,7 +79,7 @@ public class ProductEditor extends PageObject<ProductEditor> {
             throw new FotolabException("Photo did not upload successfully");
         }
         jsClick(btnLoadPhoto, driver);
-        new WebDriverWait(driver, 5)
+        new WebDriverWait(driver, 20)
                 .until(ExpectedConditions.invisibilityOf(loadingIcon));
         return this;
     }

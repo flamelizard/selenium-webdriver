@@ -1,6 +1,7 @@
 package com.selenium.principal.fotolab.pageobjects;
 
 import com.selenium.principal.fotolab.FotolabException;
+import com.selenium.principal.fotolab.pageobjects.templates.PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

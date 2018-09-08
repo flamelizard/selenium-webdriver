@@ -1,5 +1,6 @@
 package com.selenium.principal.fotolab.pageobjects;
 
+import com.selenium.principal.fotolab.pageobjects.templates.PageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

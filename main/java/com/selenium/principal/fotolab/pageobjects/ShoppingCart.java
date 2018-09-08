@@ -1,5 +1,6 @@
 package com.selenium.principal.fotolab.pageobjects;
 
+import com.selenium.principal.fotolab.pageobjects.templates.PageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,8 +11,6 @@ import static com.selenium.principal.fotolab.Utils.jsClick;
 
 
 public class ShoppingCart extends PageObject<ShoppingCart> {
-    private String header = "Nákupní košík";
-
     @FindBy(linkText = "Nákupní košík")
     private WebElement pageHeader;
 

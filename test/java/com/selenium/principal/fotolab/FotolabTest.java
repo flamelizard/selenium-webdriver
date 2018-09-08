@@ -1,51 +1,29 @@
 package com.selenium.principal.fotolab;
 
 import com.selenium.principal.fotolab.pageobjects.Fotolab;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
+import com.selenium.principal.fotolab.pageobjects.wrappers.TestSuiteTempl;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
 
-
-@FixMethodOrder(MethodSorters.JVM)
-public class FotolabTest {
-    public static String configFile = "config/fotolab.properties";
-    public static Properties config;
-    private static Browser browser;
-
-    @BeforeClass()
-    public static void setup() throws IOException, FotolabException {
-        config = Utils.getConfig(configFile);
-        browser = new Browser(config.getProperty("webdriver.path"));
-        browser.getDriver().get(config.getProperty("fotolab.url"));
-    }
-
-    @AfterClass
-    public static void cleanup() {
-        boolean shouldClose = Boolean.valueOf(
-                config.getProperty("testDone.browser.close"));
-        if (shouldClose)
-            browser.close();
-    }
+public class FotolabTest extends TestSuiteTempl {
 
     @Test
-    public void testScenarioForRFI() throws Exception {
-        List<String> expected = Arrays.asList(
-                config.getProperty("fotoobrazy.expectedTypes").split(","));
+    public void makeProductOrder() throws Exception {
+        String[] expectedTypes = testConfig.getProperty(
+                "fotoobrazy.expectedTypes").split(",");
 
-        new Fotolab(browser.getDriver())
+        new Fotolab(driver, testConfig.getProperty("fotolab.url"))
                 .selectFotoobrazy()
-                .checkAvailableTypes(expected)
+                .checkAvailableTypes(Arrays.asList(expectedTypes))
                 .selectFotoNaPlatno()
                 .makeOrder()
-                .uploadPhotoBackground(config.getProperty("user.photo.path"))
+                .uploadBackgroundPhoto(
+                        testConfig.getProperty("user.photo.path"))
                 .addOrderToCart()
                 .proceedToRegistration();
     }
+
+    //    TODO cross-browser testing, run same test on Chrome and FF
+
 }

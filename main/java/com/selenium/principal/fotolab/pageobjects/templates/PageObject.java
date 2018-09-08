@@ -1,4 +1,4 @@
-package com.selenium.principal.fotolab.pageobjects;
+package com.selenium.principal.fotolab.pageobjects.templates;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
