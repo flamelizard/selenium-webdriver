@@ -12,15 +12,14 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.nio.file.Paths;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
-import static com.selenium.principal.fotolab.Utils.isFile;
-import static com.selenium.principal.fotolab.Utils.jsClick;
+import static com.selenium.principal.fotolab.common.Utils.*;
 
 
 public class ProductEditor extends PageObject<ProductEditor> {
     @FindBy(id = "centerStage_content.image0")
-    private WebElement imageIcon;
+    private WebElement imageOutline;
 
     @FindBy(linkText = "Vybrat fotografie")
     private WebElement choosePhoto;
@@ -29,15 +28,18 @@ public class ProductEditor extends PageObject<ProductEditor> {
     private WebElement formUploadPhoto;
 
     @FindBy(id = "galleryAndInboxBrowser_uplDlg1_file-1")
-    private WebElement inputUploadPhoto;
+    private WebElement inUploadPhoto;
 
     @FindBy(id = "galleryAndInboxBrowser_uplDlg1_fileList")
     private WebElement ulUploadedFiles;
 
     @FindBy(linkText = "Nahrát vybrané fotografie")
-    private WebElement btnLoadPhoto;
+    private WebElement btnUploadSubmit;
 
-    @FindBy(linkText = "Přidat do košíku")
+    @FindBy(css = "div.htmlUploadDone a")
+    private WebElement btnUploadDone;
+
+    @FindBy(xpath = "//a[contains(@onclick,'Přidat')]")
     private WebElement btnAddToCart;
 
     @FindBy(id = "waiter")
@@ -45,6 +47,11 @@ public class ProductEditor extends PageObject<ProductEditor> {
 
     @FindBy(css = "#shoppingCartButton>a")
     private WebElement btnAddToCartPreview;
+
+    @FindBy(xpath = "//div[contains(@onclick,'galleryAndInboxBrowser_uplDlg1')]")
+    private WebElement divFileUpload;
+
+    private WebDriverWait wait = new WebDriverWait(driver, 3);
 
     public ProductEditor(WebDriver driver) {
         super(driver);
@@ -54,20 +61,50 @@ public class ProductEditor extends PageObject<ProductEditor> {
     @Override
     protected void isLoaded() throws Error {
         new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.visibilityOf(imageIcon));
+                .until(ExpectedConditions.elementToBeClickable(imageOutline));
     }
 
     public ProductEditor uploadBackgroundPhoto(String photo) throws FotolabException {
         if (!isFile(photo))
             throw new FotolabException("Photo file not found <" + photo + ">");
 
-        jsClick(imageIcon, driver);
+        imageOutline.click();
         new FluentWait<>(driver)
                 .ignoring(StaleElementReferenceException.class)
-                .withTimeout(5, TimeUnit.SECONDS)
+                .withTimeout(Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOf(formUploadPhoto));
+        uploadViaInputElem(photo);
+        sleep(1);
+        return this;
+    }
 
-        inputUploadPhoto.sendKeys(photo);
+    public ShoppingCart addOrderToCart() {
+        btnAddToCart.click();
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions.elementToBeClickable(btnAddToCartPreview));
+        btnAddToCartPreview.click();
+        return new ShoppingCart(driver);
+    }
+
+    private void uploadViaFileDialog(String photo) throws FotolabException {
+        divFileUpload.click();
+        sleep(1);
+        selectFileViaDialog(photo);
+        verifyPhotoUpload(photo);
+        wait.until(ExpectedConditions.visibilityOf(btnUploadDone))
+                .click();
+    }
+
+    private void uploadViaInputElem(String photo)
+            throws FotolabException {
+        inUploadPhoto.sendKeys(photo);
+        verifyPhotoUpload(photo);
+        btnUploadSubmit.click();
+        handleAlertIfShown(driver, 2);
+        wait.until(ExpectedConditions.invisibilityOf(loadingIcon));
+    }
+
+    private void verifyPhotoUpload(String photo) throws FotolabException {
         String photoName = Paths.get(photo).getFileName().toString()
                 .toLowerCase();
         boolean photoFound = ulUploadedFiles.findElements(
@@ -78,17 +115,5 @@ public class ProductEditor extends PageObject<ProductEditor> {
         if (!photoFound) {
             throw new FotolabException("Photo did not upload successfully");
         }
-        jsClick(btnLoadPhoto, driver);
-        new WebDriverWait(driver, 20)
-                .until(ExpectedConditions.invisibilityOf(loadingIcon));
-        return this;
-    }
-
-    public ShoppingCart addOrderToCart() {
-        jsClick(btnAddToCart, driver);
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.elementToBeClickable(btnAddToCartPreview));
-        jsClick(btnAddToCartPreview, driver);
-        return new ShoppingCart(driver);
     }
 }

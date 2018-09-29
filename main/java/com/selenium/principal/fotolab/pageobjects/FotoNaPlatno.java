@@ -7,7 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static com.selenium.principal.fotolab.Utils.jsClick;
+import static com.selenium.principal.fotolab.common.Utils.acceptCookieAgreement;
+import static com.selenium.principal.fotolab.common.Utils.jsClick;
 
 
 public class FotoNaPlatno extends PageObject<FotoNaPlatno> {
@@ -19,6 +20,7 @@ public class FotoNaPlatno extends PageObject<FotoNaPlatno> {
     public FotoNaPlatno(WebDriver driver) {
         super(driver);
         get();
+        acceptCookieAgreement(driver);
     }
 
     @Override

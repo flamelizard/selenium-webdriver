@@ -7,15 +7,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static com.selenium.principal.fotolab.Utils.jsClick;
-
 
 public class ShoppingCart extends PageObject<ShoppingCart> {
     @FindBy(linkText = "Nákupní košík")
     private WebElement pageHeader;
 
     @FindBy(id = "nextCommercialActionButtonShoppingCart")
-    private WebElement goToRegistration;
+    private WebElement nextStep;
 
     public ShoppingCart(WebDriver driver) {
         super(driver);
@@ -25,11 +23,11 @@ public class ShoppingCart extends PageObject<ShoppingCart> {
     @Override
     protected void isLoaded() throws Error {
         new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.visibilityOf(pageHeader));
+                .until(ExpectedConditions.elementToBeClickable(nextStep));
     }
 
     public Registration proceedToRegistration() {
-        jsClick(goToRegistration, driver);
+        nextStep.click();
         return new Registration(driver);
     }
 }

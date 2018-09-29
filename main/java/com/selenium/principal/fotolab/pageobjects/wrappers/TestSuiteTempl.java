@@ -1,7 +1,7 @@
 package com.selenium.principal.fotolab.pageobjects.wrappers;
 
-import com.selenium.principal.fotolab.Browser;
-import com.selenium.principal.fotolab.Utils;
+import com.selenium.principal.fotolab.common.Browser;
+import com.selenium.principal.fotolab.common.Utils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -10,10 +10,7 @@ import org.openqa.selenium.WebDriver;
 import java.io.IOException;
 import java.util.Properties;
 
-/*
-Recommended practice to have class for driver lifecycle
-No need to close driver explicitly
- */
+// TODO generalize access to config file, maybe have some init or loader class
 public class TestSuiteTempl {
     public static String CONFIG_FILE = "config/fotolab.properties";
     protected static Properties testConfig;
@@ -35,7 +32,7 @@ public class TestSuiteTempl {
     public void cleanUp() {
         boolean shouldClose = Boolean.valueOf(
                 testConfig.getProperty("testDone.browser.close"));
-        if (shouldClose)
+        if (shouldClose && driver != null)
             driver.close();
     }
 }

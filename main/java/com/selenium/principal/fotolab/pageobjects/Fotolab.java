@@ -7,8 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static com.selenium.principal.fotolab.Utils.jsClick;
-import static com.selenium.principal.fotolab.Utils.scrollInto;
+import static com.selenium.principal.fotolab.common.Utils.jsClick;
+import static com.selenium.principal.fotolab.common.Utils.scrollInto;
 import static org.junit.Assert.assertTrue;
 
 
@@ -20,7 +20,6 @@ public class Fotolab extends PageObject<Fotolab> {
 
     @FindBy(xpath = "//a[contains(@href,'fotoobrazy')]")
     private WebElement linkFotoobrazy;
-
 
     public Fotolab(WebDriver driver, String startUrl) {
         super(driver);

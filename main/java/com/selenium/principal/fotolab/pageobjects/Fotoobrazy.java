@@ -13,7 +13,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.selenium.principal.fotolab.Utils.jsClick;
+import static com.selenium.principal.fotolab.common.Utils.acceptCookieAgreement;
+import static com.selenium.principal.fotolab.common.Utils.jsClick;
 
 
 public class Fotoobrazy extends PageObject<Fotoobrazy> {
@@ -28,19 +29,23 @@ public class Fotoobrazy extends PageObject<Fotoobrazy> {
     @FindBy(linkText = "Foto na plátno")
     private WebElement fotoNaPlatno;
 
+    private WebDriverWait wait = new WebDriverWait(driver, 3);
+
     public Fotoobrazy(WebDriver driver) {
         super(driver);
         get();
+        acceptCookieAgreement(driver);
     }
 
     @Override
     protected void isLoaded() throws Error {
-        new WebDriverWait(driver, 2).until(
-                ExpectedConditions.titleContains(title));
+        new WebDriverWait(driver, 3).until(
+                ExpectedConditions.elementToBeClickable(fotoNaPlatno));
     }
 
-    public List<WebElement> getFotoobrazyLinks() {
-        return navigationPane.findElements(By
+    private List<WebElement> getFotoobrazyLinks() {
+        return navigationPane
+                .findElements(By
                 .cssSelector("a[href*='fotoobrazy']"));
     }
 
