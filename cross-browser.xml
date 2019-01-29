@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="cross-browser-test">
+    <test name="make-order">
+        <classes>
+            <class name="com.selenium.principal.fotolab.tests.CrossBrowserTestNGTest"/>
+        </classes>
+    </test>
+</suite>

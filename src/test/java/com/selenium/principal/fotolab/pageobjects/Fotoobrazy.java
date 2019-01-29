@@ -1,6 +1,6 @@
 package com.selenium.principal.fotolab.pageobjects;
 
-import com.selenium.principal.fotolab.FotolabException;
+import com.selenium.principal.fotolab.common.FotolabException;
 import com.selenium.principal.fotolab.pageobjects.templates.PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -46,7 +46,7 @@ public class Fotoobrazy extends PageObject<Fotoobrazy> {
     private List<WebElement> getFotoobrazyLinks() {
         return navigationPane
                 .findElements(By
-                .cssSelector("a[href*='fotoobrazy']"));
+                        .cssSelector("a[href*='fotoobrazy']"));
     }
 
     public Fotoobrazy checkAvailableTypes(List<String> expectedTypes)

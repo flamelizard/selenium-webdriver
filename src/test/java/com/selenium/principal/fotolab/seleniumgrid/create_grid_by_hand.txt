@@ -1,0 +1,11 @@
+# start local grid
+java -jar selenium-server-standalone-3.14.0.jar -port 4444 -role hub
+
+# add node to grid
+# browserName must match grid terminology, otherwise create session exception
+java -Dwebdriver.ie.driver="D:\projects\fotolab\src\resources\driver\IEDriverServer64.exe" -jar selenium-server-standalone-3.14.0.jar -role webdriver -browser "browserName=internet explorer,version=11,maxinstance=1, platform=WINDOWS" -hubHost 192.168.99.1 -port 5000
+
+java -Dwebdriver.gecko.driver="D:\projects\fotolab\src\resources\driver\geckodriver.exe" -jar selenium-server-standalone-3.14.0.jar -role webdriver -browser "browserName=firefox,version=62.0.2,maxinstance=2, platform=WINDOWS" -hubHost 192.168.99.1 -port 5001
+
+java -Dwebdriver.chrome.driver="D:\projects\fotolab\src\resources\driver\chromedriver.exe" -jar selenium-server-standalone-3.14.0.jar -role webdriver -browser "browserName=chrome,version=69.0,maxinstance=1, platform=WINDOWS" -hubHost 192.168.99.1 -port 5002
+

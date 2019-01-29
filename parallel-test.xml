@@ -1,0 +1,32 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<!--parallel="tests"  run each <test> in own thread-->
+<suite name="parallel-test" thread-count="4" verbose="1" parallel="tests">
+
+    <test name="firefox-on-grid">
+        <parameter name="platform" value="WINDOWS"/>
+        <parameter name="browser" value="firefox"/>
+        <parameter name="version" value="62.0.2"/>
+        <classes>
+            <class name="com.selenium.principal.fotolab.seleniumgrid.ParallelTest"/>
+        </classes>
+    </test>
+
+    <test name="ie-on-grid">
+        <parameter name="platform" value="WINDOWS"/>
+        <parameter name="browser" value="internet explorer"/>
+        <parameter name="version" value="11"/>
+        <classes>
+            <class name="com.selenium.principal.fotolab.seleniumgrid.ParallelTest"/>
+        </classes>
+    </test>
+
+    <!--<test name="chrome-on-grid">-->
+    <!--<parameter name="platform" value="WINDOWS"/>-->
+    <!--<parameter name="browser" value="chrome"/>-->
+    <!--<parameter name="version" value="69.0"/>-->
+    <!--<classes>-->
+    <!--<class name="com.selenium.principal.fotolab.seleniumgrid.ParallelTest"/>-->
+    <!--</classes>-->
+    <!--</test>-->
+</suite>

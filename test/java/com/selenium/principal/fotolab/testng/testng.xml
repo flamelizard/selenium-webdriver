@@ -1,9 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
-
-<suite name="fotolab">
-    <test name="make-order">
-        <classes>
-            <class name="com.selenium.principal.fotolab.testng.CrossBrowserTestNGTest"/>
-        </classes>
-    </test>
-</suite>

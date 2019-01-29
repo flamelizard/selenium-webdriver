@@ -1,10 +1,10 @@
-package com.selenium.principal.fotolab;
+package com.selenium.principal.fotolab.tests;
 
+import com.selenium.principal.fotolab.Project;
 import com.selenium.principal.fotolab.common.BrowserManager;
 import com.selenium.principal.fotolab.common.BrowserType;
 import com.selenium.principal.fotolab.common.Utils;
 import com.selenium.principal.fotolab.pageobjects.Fotolab;
-import com.selenium.principal.fotolab.pageobjects.wrappers.TestSuiteTempl;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,7 +22,7 @@ import static com.selenium.principal.fotolab.common.BrowserType.FIREFOX;
 
 /*
 TODO run on headless
-TODO support driver version selection, run on older Chrome
+TODO move github repo root to /src, include pom.xml, add README to root, yaml?
  */
 @RunWith(Parameterized.class)
 public class CrossBrowserJUnitTest {
@@ -33,7 +33,7 @@ public class CrossBrowserJUnitTest {
 
     @BeforeClass
     public static void setup() throws IOException {
-        testConfig = Utils.getConfig(TestSuiteTempl.CONFIG_FILE);
+        testConfig = Utils.getConfig(Project.CONFIG_FILE);
     }
 
     @Parameters

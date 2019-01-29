@@ -1,4 +1,4 @@
-package com.selenium.principal.fotolab;
+package com.selenium.principal.fotolab.common;
 
 
 public class FotolabException extends Exception {
